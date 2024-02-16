@@ -2,25 +2,14 @@ import { useState } from 'react';
 
 import { ProductCard } from './productCard/ProductCard';
 
+import { ProductServices } from '../../services';
+
 import './Products.css';
 
 export const Products = () => {
   const [cart, setCart] = useState([]);
 
-  const products = [
-    {
-      id: '1',
-      name: 'Computer',
-      price: 70000,
-      quantity: 20,
-    },
-    {
-      id: '2',
-      name: 'Keyboard',
-      price: 5000,
-      quantity: 40,
-    },
-  ];
+  const products = ProductServices.getProducts();
 
   const isProductExistsInCart = (productId) =>
     cart.some((product) => product.id === productId);
