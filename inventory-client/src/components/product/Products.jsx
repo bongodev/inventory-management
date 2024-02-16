@@ -33,6 +33,10 @@ export const Products = () => {
     setCart([...cart, product]);
   };
 
+  const removeProductFromCart = (productId) => {
+    setCart(cart.filter((cartItem) => cartItem.id !== productId));
+  };
+
   return (
     <div className="products">
       <div>
@@ -45,6 +49,7 @@ export const Products = () => {
             product={product}
             isAddedToCart={isProductExistsInCart(product.id)}
             addToCart={addProductToCart}
+            removeFromCart={removeProductFromCart}
           />
         ))}
       </div>
