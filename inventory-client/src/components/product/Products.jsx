@@ -22,11 +22,11 @@ export const Products = () => {
     },
   ];
 
-  const productExistsInCart = (productId) =>
+  const isProductExistsInCart = (productId) =>
     cart.some((product) => product.id === productId);
 
   const addProductToCart = (product) => {
-    if (productExistsInCart(product.id)) {
+    if (isProductExistsInCart(product.id)) {
       alert('Already added!!!');
       return;
     }
@@ -43,6 +43,7 @@ export const Products = () => {
           <ProductCard
             key={product.id}
             product={product}
+            isAddedToCart={isProductExistsInCart(product.id)}
             addToCart={addProductToCart}
           />
         ))}

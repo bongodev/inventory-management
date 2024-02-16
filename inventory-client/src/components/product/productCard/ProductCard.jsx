@@ -1,6 +1,6 @@
 import './ProductCard.css';
 
-export function ProductCard({ product, addToCart }) {
+export function ProductCard({ product, isAddedToCart, addToCart }) {
   const handleAddToCart = () => {
     addToCart(product);
   };
@@ -13,6 +13,11 @@ export function ProductCard({ product, addToCart }) {
       <button onClick={handleAddToCart} className="product-card-cart-btn">
         Add to Cart
       </button>
+      {isAddedToCart && (
+        <button className="product-card-cart-btn danger">
+          Remove from Cart
+        </button>
+      )}
     </div>
   );
 }
