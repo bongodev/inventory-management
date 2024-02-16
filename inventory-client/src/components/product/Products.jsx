@@ -1,30 +1,17 @@
-import { useState } from 'react';
+import { useProducts } from './hooks/useProducts';
 
 import { ProductCard } from './productCard/ProductCard';
-
-import { ProductServices } from '../../services';
 
 import './Products.css';
 
 export const Products = () => {
-  const [cart, setCart] = useState([]);
-
-  const products = ProductServices.getProducts();
-
-  const isProductExistsInCart = (productId) =>
-    cart.some((product) => product.id === productId);
-
-  const addProductToCart = (product) => {
-    if (isProductExistsInCart(product.id)) {
-      alert('Already added!!!');
-      return;
-    }
-    setCart([...cart, product]);
-  };
-
-  const removeProductFromCart = (productId) => {
-    setCart(cart.filter((cartItem) => cartItem.id !== productId));
-  };
+  const {
+    cart,
+    products,
+    isProductExistsInCart,
+    addProductToCart,
+    removeProductFromCart,
+  } = useProducts();
 
   return (
     <div className="products">
