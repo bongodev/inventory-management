@@ -1,7 +1,9 @@
 import {
   AppBar,
   Avatar,
+  Badge,
   Button,
+  Card,
   Container,
   IconButton,
   Menu,
@@ -16,8 +18,10 @@ import { Box } from './Box';
 export {
   AppBar,
   Avatar,
+  Badge,
   Box,
   Button,
+  Card,
   Container,
   IconButton,
   Menu,
