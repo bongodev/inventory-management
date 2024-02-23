@@ -11,6 +11,8 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  InputBase,
+  Stack,
 } from '@mui/material';
 
 import { Box } from './Box';
@@ -29,4 +31,6 @@ export {
   Toolbar,
   Tooltip,
   Typography,
+  InputBase,
+  Stack,
 };
