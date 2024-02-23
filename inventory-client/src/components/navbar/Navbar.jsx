@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   AppBar,
   Avatar,
-  Button,
   Box,
   Container,
   Toolbar,
@@ -119,13 +119,7 @@ export function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Link to={page.toLowerCase()}>{page}</Link>
             ))}
           </Box>
 

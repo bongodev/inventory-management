@@ -1,11 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Layout, LoginPage } from '../pages';
+import { Layout, LoginPage, ContactPage } from '../pages';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    children: [
+      {
+        path: 'contact',
+        element: <ContactPage />,
+      },
+    ],
   },
   {
     path: 'login',
