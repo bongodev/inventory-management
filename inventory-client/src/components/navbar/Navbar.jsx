@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import {
   AppBar,
   Avatar,
+  Button,
   Box,
   Container,
   Toolbar,
@@ -21,6 +22,8 @@ const pages = ['Products', 'Contact', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export function Navbar() {
+  const navigate = useNavigate();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -29,6 +32,11 @@ export function Navbar() {
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleRouteChange = (route) => {
+    handleCloseNavMenu();
+    navigate(route.toLowerCase());
   };
 
   const handleCloseNavMenu = () => {
@@ -119,7 +127,13 @@ export function Navbar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={page.toLowerCase()}>{page}</Link>
+              <Button
+                key={page}
+                onClick={() => handleRouteChange(page)}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
             ))}
           </Box>
 
