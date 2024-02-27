@@ -1,9 +1,7 @@
 import invAxios from '../common/axios';
 
 const getProducts = async () => {
-  const productResponse = await invAxios.get(
-    'http://localhost:8000/api/products'
-  );
+  const productResponse = await invAxios.get('/products');
   return productResponse.data;
 };
 
