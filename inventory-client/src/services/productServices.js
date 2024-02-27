@@ -1,18 +1,10 @@
-const getProducts = () => {
-  return [
-    {
-      id: '1',
-      name: 'Computer',
-      price: 70000,
-      quantity: 20,
-    },
-    {
-      id: '2',
-      name: 'Keyboard',
-      price: 5000,
-      quantity: 40,
-    },
-  ];
+import invAxios from '../common/axios';
+
+const getProducts = async () => {
+  const productResponse = await invAxios.get(
+    'http://localhost:8000/api/products'
+  );
+  return productResponse.data;
 };
 
 export const ProductServices = {
