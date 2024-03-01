@@ -1,3 +1,5 @@
+const { Product } = require('../models');
+
 const getProducts = () => [
   {
     id: '1',
@@ -13,6 +15,11 @@ const getProducts = () => [
   },
 ];
 
-const ProductServices = { getProducts };
+const createProduct = (payload) => {
+  const product = new Product(payload);
+  return product.save();
+};
+
+const ProductServices = { createProduct, getProducts };
 
 module.exports = ProductServices;
