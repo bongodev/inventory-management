@@ -1,4 +1,7 @@
+import { Link } from 'react-router-dom';
+
 import { useProducts } from '../../hooks';
+import { Box } from '../../ui';
 
 import { ProductCard } from './productCard/ProductCard';
 
@@ -9,6 +12,9 @@ export const Products = () => {
 
   return (
     <div className="products">
+      <Box>
+        <Link to="/product-form">Add Product</Link>
+      </Box>
       <div className="products-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />

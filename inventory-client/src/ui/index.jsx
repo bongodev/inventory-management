@@ -8,6 +8,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
+  TextField,
   Toolbar,
   Tooltip,
   Typography,
@@ -33,4 +34,5 @@ export {
   Typography,
   InputBase,
   Stack,
+  TextField,
 };

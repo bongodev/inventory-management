@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { ProductForm } from '../components';
+
 import {
   Layout,
   LoginPage,
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: 'products',
         element: <ProductsPage />,
+      },
+      {
+        path: 'product-form',
+        element: <ProductForm />,
       },
       {
         path: 'contact',
