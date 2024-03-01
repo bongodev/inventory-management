@@ -15,11 +15,12 @@ export const Products = () => {
       <Box>
         <Link to="/product-form">Add Product</Link>
       </Box>
-      <div className="products-grid">
+
+      <Box flexWrap="wrap" gap={2} justifyContent="center">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </div>
+      </Box>
     </div>
   );
 };
