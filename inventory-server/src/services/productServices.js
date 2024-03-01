@@ -1,19 +1,9 @@
 const { Product } = require('../models');
 
-const getProducts = () => [
-  {
-    id: '1',
-    name: 'Computer',
-    price: 70000,
-    quantity: 20,
-  },
-  {
-    id: '2',
-    name: 'Keyboard',
-    price: 5000,
-    quantity: 40,
-  },
-];
+const getProducts = async () => {
+  const products = await Product.find();
+  return products; 
+};
 
 const createProduct = (payload) => {
   const product = new Product(payload);
