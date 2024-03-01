@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Box, Button, Stack, TextField, Typography } from '../../ui';
-import invAxios from '../../common/axios';
+
+import { ProductServices } from '../../services';
 
 export const ProductForm = () => {
   const [product, setProduct] = React.useState({
@@ -11,13 +12,10 @@ export const ProductForm = () => {
     quantity: 0,
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setProduct({ ...product, [`${e.target.name}`]: e.target.value });
-  };
 
-  const handleSubmit = () => {
-    invAxios.post('/products', product);
-  };
+  const handleSubmit = () => ProductServices.createProduct(product);
 
   return (
     <Box justifyContent="center">
