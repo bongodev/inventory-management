@@ -5,7 +5,7 @@ import { Box, Table } from '../ui';
 import { useProducts } from '../hooks';
 
 export const InventoryPage = () => {
-  const { products } = useProducts();
+  const { isLoading, products } = useProducts();
 
   const getFormattedRows = () => {
     return products.map((product, index) => ({
@@ -23,6 +23,7 @@ export const InventoryPage = () => {
     <Box px={8} py={4}>
       <Table
         autoHeight
+        loading={isLoading}
         initialState={{
           pagination: {
             paginationModel: { pageSize: 10 },
