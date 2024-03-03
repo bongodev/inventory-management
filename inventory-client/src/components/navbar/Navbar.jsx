@@ -19,7 +19,7 @@ import { AdbIcon, MenuIcon } from '../../icons';
 import { GlobalCart } from '../Cart';
 
 const pages = ['Products', 'Contact', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Inventory', 'Logout'];
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -46,6 +46,8 @@ export function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleUserMenuClick = (path) => navigate(`/${path}`);
 
   return (
     <AppBar position="static">
@@ -161,7 +163,10 @@ export function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleUserMenuClick(setting.toLowerCase())}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -8,6 +8,7 @@ import {
   ContactPage,
   ProductsPage,
   TestPage,
+  InventoryPage,
 } from '../pages';
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />,
+      },
+      {
+        path: 'inventory',
+        element: <InventoryPage />,
       },
     ],
   },
