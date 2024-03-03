@@ -15,7 +15,7 @@ export const InventoryPage = () => {
       description: product.description,
       price: product.price,
       quantity: product.quantity,
-      createdAt: product.createdAt,
+      createdAt: new Date(product.createdAt),
     }));
   };
 
@@ -23,11 +23,23 @@ export const InventoryPage = () => {
     <Box px={8} py={4}>
       <Table
         autoHeight
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: 10 },
+          },
+        }}
         columns={[
           { field: 'ID' },
           { field: 'name', headerName: 'Product Name', width: 300 },
           { field: 'description', headerName: 'Description', width: 300 },
-          { field: 'createdAt', headerName: 'Added on' },
+          {
+            align: 'center',
+            field: 'createdAt',
+            headerAlign: 'center',
+            headerName: 'Added On',
+            width: 200,
+            type: 'dateTime',
+          },
           {
             align: 'right',
             field: 'price',
