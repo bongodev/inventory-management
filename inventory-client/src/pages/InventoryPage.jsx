@@ -1,8 +1,22 @@
 import React from 'react';
 
-import { Box, Table } from '../ui';
+import { Box, IconButton, Table } from '../ui';
+import { DeleteIcon, EditIcon } from '../icons';
 
 import { useProducts } from '../hooks';
+
+const ProductActions = ({ productRowData }) => {
+  return (
+    <Box>
+      <IconButton>
+        <EditIcon />
+      </IconButton>
+      <IconButton>
+        <DeleteIcon />
+      </IconButton>
+    </Box>
+  );
+};
 
 export const InventoryPage = () => {
   const { isLoading, products } = useProducts();
@@ -56,9 +70,20 @@ export const InventoryPage = () => {
             headerAlign: 'center',
             type: 'number',
           },
+          {
+            align: 'center',
+            field: 'action',
+            headerName: 'Actions',
+            headerAlign: 'center',
+            width: 300,
+            renderCell: (rowData) => (
+              <ProductActions productRowData={rowData} />
+            ),
+          },
         ]}
         rows={getFormattedRows()}
         slots={{ noRowsOverlay: () => <h1>No Data found!!</h1> }}
+        pageSizeOptions={[5, 10, 25]}
         sx={{ '--DataGrid-overlayHeight': '300px' }}
       />
     </Box>
