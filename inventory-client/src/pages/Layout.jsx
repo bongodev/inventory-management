@@ -13,7 +13,7 @@ export const Layout = () => {
           <Outlet />
         </main>
       </CartProvider>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
