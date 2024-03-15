@@ -1,22 +1,9 @@
 import React from 'react';
 
-import { Box, IconButton, Table } from '../ui';
-import { DeleteIcon, EditIcon } from '../icons';
+import { Box, Table } from '../ui';
+import { ProductActions } from '../components';
 
 import { useProducts } from '../hooks';
-
-const ProductActions = ({ productRowData }) => {
-  return (
-    <Box>
-      <IconButton>
-        <EditIcon />
-      </IconButton>
-      <IconButton>
-        <DeleteIcon />
-      </IconButton>
-    </Box>
-  );
-};
 
 export const InventoryPage = () => {
   const { isLoading, products } = useProducts();
@@ -75,7 +62,7 @@ export const InventoryPage = () => {
             field: 'action',
             headerName: 'Actions',
             headerAlign: 'center',
-            width: 300,
+            flex: 1,
             renderCell: (rowData) => (
               <ProductActions productRowData={rowData} />
             ),

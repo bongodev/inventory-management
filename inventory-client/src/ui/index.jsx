@@ -14,6 +14,10 @@ import {
   Typography,
   InputBase,
   Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -37,4 +41,8 @@ export {
   Stack,
   TextField,
   DataGrid as Table,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 };

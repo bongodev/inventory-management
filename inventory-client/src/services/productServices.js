@@ -7,7 +7,10 @@ const getProducts = async () => {
 
 const createProduct = (product) => invAxios.post('/products', product);
 
+const deleteProduct = (productId) => invAxios.delete(`/products/${productId}`);
+
 export const ProductServices = {
   createProduct,
   getProducts,
+  deleteProduct,
 };
