@@ -17,4 +17,10 @@ productRouter.post('/products', async (req, res) => {
   }
 });
 
+productRouter.delete('/products/:id', async (req, res) => {
+  const { id } = req.params;
+  await ProductServices.deleteProduct(id);
+  res.status(200).json({ message: 'successfully deleted' });
+});
+
 module.exports = productRouter;
