@@ -14,17 +14,22 @@ import { ProductServices } from '../../services';
 
 export const ProductActions = ({ productRowData }) => {
   const [productToDelete, setProductToDelete] = React.useState(null);
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   const onCloseDeleteModal = () => setProductToDelete(null);
 
   const onConfirmProductDelete = () => {
+    setIsDeleting(true);
     ProductServices.deleteProduct(productToDelete)
       .then()
       .catch((err) => {
         console.error(err);
         alert('Failed to delete');
       })
-      .finally(onCloseDeleteModal);
+      .finally(() => {
+        setIsDeleting(false);
+        onCloseDeleteModal();
+      });
   };
 
   return (
@@ -43,6 +48,7 @@ export const ProductActions = ({ productRowData }) => {
         </DialogContent>
         <DialogActions>
           <Button
+            disabled={isDeleting}
             color="error"
             variant="outlined"
             onClick={onConfirmProductDelete}
