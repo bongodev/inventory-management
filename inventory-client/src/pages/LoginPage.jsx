@@ -17,8 +17,12 @@ export const LoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    AuthServices.setAuthToken('dummy token');
-    window.history.back();
+    AuthServices.login(credential)
+      .then(() => window.history.back())
+      .catch((err) => {
+        console.error(err);
+        alert(err.message || 'Invalid credential');
+      });
   };
 
   return (
