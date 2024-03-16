@@ -11,6 +11,8 @@ import {
   InventoryPage,
 } from '../pages';
 
+import SecureRoute from './SecureRoute';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -26,7 +28,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'product-form',
-        element: <ProductForm />,
+        element: (
+          <SecureRoute>
+            <ProductForm />
+          </SecureRoute>
+        ),
       },
       {
         path: 'contact',
@@ -34,7 +40,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'inventory',
-        element: <InventoryPage />,
+        element: (
+          <SecureRoute>
+            <InventoryPage />
+          </SecureRoute>
+        ),
       },
     ],
   },
