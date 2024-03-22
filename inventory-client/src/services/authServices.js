@@ -9,7 +9,7 @@ const setAuthToken = (token) => {
   localStorage.setItem(AUTH_TOKEN_KEY, token);
 };
 
-const hasToken = () => Boolean(getAuthToken());
+const isAuthenticated = () => Boolean(getAuthToken());
 
 const login = async ({ email, password }) => {
   const res = await invAxios.post('/login', { email, password });
@@ -17,9 +17,12 @@ const login = async ({ email, password }) => {
   setAuthToken(accessToken);
 };
 
+const logout = () => localStorage.removeItem(AUTH_TOKEN_KEY);
+
 export const AuthServices = {
   getAuthToken,
   setAuthToken,
-  hasToken,
+  isAuthenticated,
   login,
+  logout,
 };

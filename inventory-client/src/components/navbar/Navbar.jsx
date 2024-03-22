@@ -16,6 +16,8 @@ import {
 } from '../../ui';
 import { AdbIcon, MenuIcon } from '../../icons';
 
+import { AuthServices } from '../../services';
+
 import { GlobalCart } from '../Cart';
 
 const pages = ['Products', 'Contact', 'Blog'];
@@ -48,6 +50,16 @@ export function Navbar() {
   };
 
   const handleUserMenuClick = (path) => navigate(`/${path}`);
+
+  const handleSettingsMenuClick = (setting) => {
+    if (setting === 'Logout') {
+      AuthServices.logout();
+      window.location.reload();
+      return;
+    }
+
+    handleUserMenuClick(setting.toLowerCase());
+  };
 
   return (
     <AppBar position="static">
@@ -141,11 +153,21 @@ export function Navbar() {
 
           <Box gap={2} sx={{ flexGrow: 0 }}>
             <GlobalCart />
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            {AuthServices.isAuthenticated() ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            ) : (
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => navigate('/login')}
+              >
+                Login
+              </Button>
+            )}
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -165,7 +187,7 @@ export function Navbar() {
               {settings.map((setting) => (
                 <MenuItem
                   key={setting}
-                  onClick={() => handleUserMenuClick(setting.toLowerCase())}
+                  onClick={() => handleSettingsMenuClick(setting)}
                 >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>

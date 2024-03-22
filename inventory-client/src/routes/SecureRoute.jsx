@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthServices } from '../services';
 
 const SecureRoute = ({ children }) => {
-  const isAuthenticated = AuthServices.hasToken();
+  const isAuthenticated = AuthServices.isAuthenticated();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
