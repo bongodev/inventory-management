@@ -12,9 +12,9 @@ export function ProductCard({ product }) {
 
   const handleAddToCart = () => addProductToCart(product);
 
-  const handleRemoveFromCart = () => removeProductFromCart(product.id);
+  const handleRemoveFromCart = () => removeProductFromCart(product._id);
 
-  const isAddedToCart = isProductExistsInCart(product.id);
+  const isAddedToCart = isProductExistsInCart(product._id);
 
   return (
     <Card sx={{ width: 345 }}>
