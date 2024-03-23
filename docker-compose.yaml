@@ -1,0 +1,28 @@
+services:
+  inventory-client:
+    container_name: inventory-client
+    build:
+      context: ./inventory-client
+      dockerfile: dockerfile
+    depends_on:
+      - inventory-server
+    ports:
+      - 3000:3000
+    volumes:
+      - ./inventory-client/src/:/app/src
+
+  inventory-server:
+    container_name: inventory-server
+    build:
+      context: ./inventory-server
+      dockerfile: dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./inventory-server/src/:/app/src
+    environment:
+      - MONGODB_USER=kamrul
+      - MONGODB_PASSWORD=pFkaSDpz6ZmWF0Gd
+      - MONGODB_URI=mongodb+srv://kamrul:pFkaSDpz6ZmWF0Gd@testcluster.fyys3k7.mongodb.net/?retryWrites=true&w=majority&appName=TestCluster
+      - PORT=8000
+      - JWT_SECRET=my-secret
