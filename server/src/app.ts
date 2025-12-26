@@ -1,8 +1,9 @@
-const express = require("express");
+import express, { type Request, type Response } from "express";
+
 const app = express();
 const port = 6070;
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   console.log(req);
   res.send("Hello World!");
 });
