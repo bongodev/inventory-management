@@ -1,0 +1,19 @@
+services:
+  mongo:
+    image: mongo
+    container_name: ivm-mongo
+    restart: unless-stopped
+    ports:
+      - "27023:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - ./.data/mongo_data:/data/db
+      - ./.data/mongo_config:/data/configdb
+    networks:
+      - ivm-network
+
+networks:
+  ivm-network:
+    driver: bridge
