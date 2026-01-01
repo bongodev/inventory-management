@@ -9,7 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true,
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -19,7 +18,8 @@
     "noUncheckedSideEffectImports": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "types/**/*"
   ],
   "exclude": [
     "node_modules",
