@@ -1,7 +1,9 @@
 import express, { type Request, type Response } from "express";
+import { envConfig } from "./config";
+
 
 const app = express();
-const port = 6070;
+const port = envConfig
 
 app.get("/", (req: Request, res: Response) => {
   console.log(req);
