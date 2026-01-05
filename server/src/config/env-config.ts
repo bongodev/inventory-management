@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 type EnvConfig = {
-  NODE_ENV: "development" | "production" | "test";
+  ENVIRONMENT: "development" | "production" | "test";
   PORT: number;
   JWT_SECRET: string;
   MONGO_URI: string;
@@ -19,7 +19,7 @@ const getEnvVar = (key: string, defaultValue?: string): string => {
 };
 
 const config: EnvConfig = {
-  NODE_ENV: (process.env.NODE_ENV as EnvConfig["NODE_ENV"]) || "development",
+  ENVIRONMENT: (process.env.ENVIRONMENT as EnvConfig["ENVIRONMENT"]) || "development",
   PORT: parseInt(getEnvVar("PORT", "6070"), 10),
   MONGO_URI: getEnvVar("MONGO_URI"),
   JWT_SECRET: getEnvVar("JWT_SECRET"),
