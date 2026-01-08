@@ -4,7 +4,7 @@ import "./index.css";
 //import App from "./App.tsx";
 import { AppRouter } from './routers'
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AppRouter />
   </StrictMode>,
