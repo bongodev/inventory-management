@@ -1,6 +1,6 @@
 import pino from "pino";
 
-import { envConfig } from "@/env-config";
+import { envConfig } from "./env-config";
 
 const transport = pino.transport({
   options: {

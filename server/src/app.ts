@@ -5,11 +5,14 @@ import { envConfig, connectDB } from "@/config";
 import configureRouters from "@/routes";
 import { errorHandler } from "@/middlewares";
 
-connectDB();
+import pinoHttp from "pino-http";
 
 const app = express();
-app.use(express.json());
+app.use(pinoHttp({ logger }));
 
+connectDB();
+
+app.use(express.json());
 app.use(
   cors({
     origin: envConfig.CORS_ORIGIN,
