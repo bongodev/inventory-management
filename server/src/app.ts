@@ -1,6 +1,8 @@
-import express, { type Request, type Response } from "express";
-import { envConfig, connectDB } from "@/config";
 import cors from "cors";
+import express, { type Request, type Response } from "express";
+
+import { envConfig, connectDB } from "@/config";
+import configureRouters from "@/routes";
 
 connectDB();
 
@@ -13,10 +15,7 @@ app.use(
 );
 const port = envConfig.PORT;
 
-app.get("/", (req: Request, res: Response) => {
-  console.log(req);
-  res.send("Hello World!");
-});
+configureRouters(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
