@@ -7,6 +7,8 @@ import configureRouters from "@/routes";
 connectDB();
 
 const app = express();
+app.use(express.json());
+
 app.use(
   cors({
     origin: envConfig.CORS_ORIGIN,

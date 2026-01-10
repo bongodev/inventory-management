@@ -3,6 +3,6 @@ import adminUserRouter from "./user.route";
 
 const adminRouter = Router();
 
-adminRouter.use("/user", adminUserRouter);
+adminRouter.use("/users", adminUserRouter);
 
 export default adminRouter;

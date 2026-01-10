@@ -15,3 +15,10 @@ export const UserSchema = z.object({
   isDraft: z.boolean().optional().default(false),
   role: UserRoleEnum,
 });
+
+export const CreateUserSchema = UserSchema.pick({
+  name: true,
+  email: true,
+}).extend({
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+});
