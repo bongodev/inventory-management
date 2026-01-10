@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import { User } from "@/types";
+import { softDeletePlugin } from "@/common/mongoose-plugins";
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,6 +15,8 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.plugin(softDeletePlugin);
 
 export type UserDocument = User & mongoose.Document;
 
