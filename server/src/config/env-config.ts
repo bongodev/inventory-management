@@ -7,6 +7,7 @@ type EnvConfig = {
   MONGO_URI: string;
   DB_NAME: string;
   CORS_ORIGIN: string;
+  BCRYPT_SALT_ROUNDS: number;
 };
 
 const getEnvVar = (key: string, defaultValue?: string): string => {
@@ -26,6 +27,7 @@ const config: EnvConfig = {
   DB_NAME: getEnvVar('DB_NAME'),
   JWT_SECRET: getEnvVar("JWT_SECRET"),
   CORS_ORIGIN: getEnvVar("CORS_ORIGIN", "http://localhost:3000"),
+  BCRYPT_SALT_ROUNDS: parseInt(getEnvVar("BCRYPT_SALT_ROUNDS", "10"), 10),
 };
 
 export const envConfig = Object.freeze(config);
