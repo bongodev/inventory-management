@@ -8,6 +8,7 @@ type EnvConfig = {
   DB_NAME: string;
   CORS_ORIGIN: string;
   BCRYPT_SALT_ROUNDS: number;
+  LOG_LEVEL: string;
 };
 
 const getEnvVar = (key: string, defaultValue?: string): string => {
@@ -21,13 +22,15 @@ const getEnvVar = (key: string, defaultValue?: string): string => {
 };
 
 const config: EnvConfig = {
-  ENVIRONMENT: (process.env.ENVIRONMENT as EnvConfig["ENVIRONMENT"]) || "development",
+  ENVIRONMENT:
+    (process.env.ENVIRONMENT as EnvConfig["ENVIRONMENT"]) || "development",
   PORT: parseInt(getEnvVar("PORT", "6070"), 10),
   MONGO_URI: getEnvVar("MONGO_URI"),
-  DB_NAME: getEnvVar('DB_NAME'),
+  DB_NAME: getEnvVar("DB_NAME"),
   JWT_SECRET: getEnvVar("JWT_SECRET"),
   CORS_ORIGIN: getEnvVar("CORS_ORIGIN", "http://localhost:3000"),
   BCRYPT_SALT_ROUNDS: parseInt(getEnvVar("BCRYPT_SALT_ROUNDS", "10"), 10),
+  LOG_LEVEL: getEnvVar("LOG_LEVEL"),
 };
 
 export const envConfig = Object.freeze(config);
