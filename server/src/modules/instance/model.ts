@@ -16,4 +16,7 @@ instanceSchema.plugin(softDeletePlugin);
 
 export type InstanceDocument = Instance & mongoose.Document;
 
-export const InstanceModel = mongoose.model("Instance", instanceSchema);
+export const InstanceModel = mongoose.model<InstanceDocument>(
+  "Instance",
+  instanceSchema
+);

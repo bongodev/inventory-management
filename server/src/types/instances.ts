@@ -1,4 +1,5 @@
 import { z } from "zod";
-import { InstanceSchema } from "@/schemas";
+import { InstanceSchema,CreateInstanceSchema } from "@/schemas";
 
 export type Instance = z.infer<typeof InstanceSchema>;
+export type CreateInstance = z.infer<typeof CreateInstanceSchema>;
