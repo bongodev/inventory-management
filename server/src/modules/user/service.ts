@@ -5,13 +5,13 @@ import { CreateUserSchema } from '@/schemas';
 import { UserModel } from './model';
 import { envConfig } from '@/config';
 
+export const getHashedPassword = async (password: string) =>
+  bcrypt.hash(password, envConfig.BCRYPT_SALT_ROUNDS);
+
 export const createUser = async (
   userPayload: z.infer<typeof CreateUserSchema>,
 ) => {
-  const hashedPassword = await bcrypt.hash(
-    userPayload.password,
-    envConfig.BCRYPT_SALT_ROUNDS,
-  );
+  const hashedPassword = await getHashedPassword(userPayload.password);
 
   const newUser = await UserModel.create({
     name: userPayload.name,
@@ -22,4 +22,8 @@ export const createUser = async (
   });
 
   return newUser;
+};
+
+export const findUserByEmail = async (email: string) => {
+  return UserModel.findOne({ email });
 };

@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { type Request, type Response } from 'express';
+import express from 'express';
 
 import { envConfig, connectDB } from '@/config';
 import configureRouters from '@/routes';

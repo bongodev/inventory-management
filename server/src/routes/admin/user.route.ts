@@ -12,19 +12,19 @@ adminUserRouter.post(
   validateRequestBody(CreateUserSchema),
   userController.createUser,
 );
-adminUserRouter.get('/', (req: Request, res: Response) => {
+adminUserRouter.get('/', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.get('/:id', (req: Request, res: Response) => {
+adminUserRouter.get('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.put('/:id', (req: Request, res: Response) => {
+adminUserRouter.put('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.delete('/:id', (req: Request, res: Response) => {
+adminUserRouter.delete('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.patch('/:id/restore', (req: Request, res: Response) => {
+adminUserRouter.patch('/:id/restore', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
 export default adminUserRouter;
