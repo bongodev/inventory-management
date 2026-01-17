@@ -8,6 +8,8 @@ type EnvConfig = {
   DB_NAME: string;
   CORS_ORIGIN: string;
   BCRYPT_SALT_ROUNDS: number;
+  SESSION_SECRET: string;
+  CLIENT_URL: string;
 };
 
 const getEnvVar = (key: string, defaultValue?: string): string => {
@@ -29,6 +31,8 @@ const config: EnvConfig = {
   JWT_SECRET: getEnvVar('JWT_SECRET'),
   CORS_ORIGIN: getEnvVar('CORS_ORIGIN', 'http://localhost:3000'),
   BCRYPT_SALT_ROUNDS: parseInt(getEnvVar('BCRYPT_SALT_ROUNDS', '10'), 10),
+  SESSION_SECRET: getEnvVar('SESSION_SECRET', 'default_session_secret'),
+  CLIENT_URL: getEnvVar('CLIENT_URL', 'http://localhost:5175'),
 };
 
 export const envConfig = Object.freeze(config);

@@ -1,41 +1,46 @@
-import App from "@/App";
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import App from '@/App';
+import { createBrowserRouter } from 'react-router';
+import { RouterProvider } from 'react-router/dom';
+import Login from '@/pages/login';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App/>,
+    path: '/',
+    element: <App />,
     children: [
       {
         index: true,
         element: <div>home page</div>,
       },
       {
-        path: "dashboard",
+        path: 'dashboard',
         element: <div>dashboard page</div>,
       },
       {
-        path: "products",
+        path: 'products',
         element: <div>products page</div>,
       },
       {
-        path: "orders",
+        path: 'orders',
         element: <div>orders page</div>,
       },
       {
-        path: "reports",
+        path: 'reports',
         element: <div>reports page</div>,
       },
       {
-        path: "users",
+        path: 'users',
         element: <div>users page</div>,
       },
       {
-        path: "settings",
+        path: 'settings',
         element: <div>settings page</div>,
       },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
 
