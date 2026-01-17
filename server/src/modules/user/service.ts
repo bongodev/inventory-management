@@ -25,6 +25,10 @@ export const createUser = async (
   return newUser;
 };
 
+export const getUsers = async () => {
+  return UserModel.find();
+}
+
 export const findUserByEmail = async (email: string) => {
   return UserModel.findOne({ email }).select('_id name email passwordHash role deleted');
 };
