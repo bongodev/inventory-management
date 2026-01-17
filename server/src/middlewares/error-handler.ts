@@ -1,11 +1,11 @@
-import { ZodError } from "zod";
-import { NextFunction, Request, Response } from "express";
+import { ZodError } from 'zod';
+import { NextFunction, Request, Response } from 'express';
 
 export const errorHandler = (
   err: Error,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ) => {
   // Handle Zod validation errors
   if (err instanceof ZodError) {
@@ -15,31 +15,31 @@ export const errorHandler = (
   }
 
   // Handle mongoose duplicate key error
-  if (err.name === "MongoServerError" && "code" in err && err.code === 11000) {
+  if (err.name === 'MongoServerError' && 'code' in err && err.code === 11000) {
     return res.status(409).json({
-      error: "Duplicate key error",
+      error: 'Duplicate key error',
     });
   }
 
   // Handle mongoose validation errors
-  if (err.name === "ValidationError") {
+  if (err.name === 'ValidationError') {
     return res.status(400).json({
       error: err.message,
     });
   }
 
   // Handle mongodb cast errors
-  if (err.name === "CastError") {
+  if (err.name === 'CastError') {
     return res.status(400).json({
-      error: "Invalid ID format",
+      error: 'Invalid ID format',
     });
   }
 
-  console.error("************************************");
+  console.error('************************************');
   console.error(err);
-  console.error("************************************");
+  console.error('************************************');
 
   res.status(500).json({
-    error: "Internal Server Error",
+    error: 'Internal Server Error',
   });
 };

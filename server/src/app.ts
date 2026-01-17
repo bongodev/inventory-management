@@ -1,9 +1,9 @@
-import cors from "cors";
-import express, { type Request, type Response } from "express";
+import cors from 'cors';
+import express from 'express';
 
-import { envConfig, connectDB } from "@/config";
-import configureRouters from "@/routes";
-import { errorHandler } from "@/middlewares";
+import { envConfig, connectDB } from '@/config';
+import configureRouters from '@/routes';
+import { errorHandler } from '@/middlewares';
 
 connectDB();
 
@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: envConfig.CORS_ORIGIN,
     credentials: true,
-  })
+  }),
 );
 
 const port = envConfig.PORT;

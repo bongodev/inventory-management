@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-import { User } from "@/types";
-import { softDeletePlugin } from "@/common/mongoose-plugins";
+import { User } from '@/types';
+import { softDeletePlugin } from '@/common/mongoose-plugins';
 
 const userSchema = new mongoose.Schema(
   {
@@ -9,15 +9,15 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true, unique: true },
     passwordHash: { type: String, required: true },
     isDraft: { type: Boolean, default: false },
-    role: { type: String, enum: ["admin", "shop-keeper"], required: true },
+    role: { type: String, enum: ['admin', 'shop-keeper'], required: true },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 userSchema.plugin(softDeletePlugin);
 
 export type UserDocument = User & mongoose.Document;
 
-export const UserModel = mongoose.model<UserDocument>("User", userSchema);
+export const UserModel = mongoose.model<UserDocument>('User', userSchema);
