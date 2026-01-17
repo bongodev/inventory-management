@@ -12,9 +12,7 @@ adminUserRouter.post(
   validateRequestBody(CreateUserSchema),
   userController.createUser,
 );
-adminUserRouter.get('/', (_req: Request, _res: Response) => {
-  throw new NotImplementedError();
-});
+adminUserRouter.get('/', userController.getUsers);
 adminUserRouter.get('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
