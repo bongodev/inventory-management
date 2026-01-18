@@ -1,20 +1,25 @@
-import App from '@/App';
 import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
-import Login from '@/pages/login';
+
+import { Layout, Login } from '@/pages';
+import { InstancePage } from '@/pages/instances';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Layout />,
     children: [
       {
         index: true,
-        element: <div>home page</div>,
+        element: <InstancePage />,
       },
       {
         path: 'dashboard',
         element: <div>dashboard page</div>,
+      },
+      {
+        path: 'instances',
+        element: <InstancePage />,
       },
       {
         path: 'products',
