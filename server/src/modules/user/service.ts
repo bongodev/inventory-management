@@ -32,3 +32,8 @@ export const findUserByEmail = async (email: string) => {
 export const verifyPassword = async (user: User, password: string) => {
   return bcrypt.compare(password, user.passwordHash);
 };
+
+
+export const getUserById = async (id: string) => {
+  return UserModel.findById(id).exec(); // here exec() returns a Promise
+}

@@ -15,9 +15,10 @@ adminUserRouter.post(
 adminUserRouter.get('/', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
-adminUserRouter.get('/:id', (_req: Request, _res: Response) => {
-  throw new NotImplementedError();
-});
+
+
+adminUserRouter.get('/:id', userController.getUserById);
+
 adminUserRouter.put('/:id', (_req: Request, _res: Response) => {
   throw new NotImplementedError();
 });
