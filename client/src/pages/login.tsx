@@ -18,7 +18,7 @@ export default function Login() {
         { withCredentials: true },
       )
       .then((response) => {
-        console.log('Login successful:', response.data);
+        localStorage.setItem('inv-user', JSON.stringify(response.data.user));
         window.location.href = '/';
       })
       .catch((error) => {
