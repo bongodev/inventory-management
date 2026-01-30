@@ -1,4 +1,23 @@
 services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: ivm-client
+    depends_on:
+      - server
+    restart: on-failure
+    ports:
+      - "5176:5175"
+    volumes:
+      - ./client/src:/code/src
+      - ./client/public:/code/public
+    networks:
+      - ivm-network
+    environment:
+      - VITE_PORT_NUMBER=5175
+      - VITE_API_BASE_URL=http://localhost:5692
+
   server:
     build:
       context: ./server
@@ -17,7 +36,7 @@ services:
     environment:
       - ENVIRONMENT=development
       - PORT=5000
-      - CORS_ORIGIN=http://localhost:5175
+      - CORS_ORIGIN=http://localhost:5176
       - MONGO_URI=mongodb://admin:password@mongo:27017
       - DB_NAME=inv-db
       - JWT_SECRET=top-secret-key
