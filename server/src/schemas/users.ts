@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
-import { CreatedMixin, SoftDeleteMixin, UpdatedMixin } from './mixin';
+import {
+  CreatedMixin,
+  ListRequestMixin,
+  SearchRequestMixin,
+  SoftDeleteMixin,
+  UpdatedMixin,
+} from './mixin';
 
 export const UserRoleEnum = z.enum(['admin', 'shop-keeper']);
 
@@ -40,3 +46,9 @@ export const UpdateUserSchema = z
       .min(6, 'Password must be at least 6 characters long')
       .optional(),
   });
+
+export const SearchUserFilterSchema = z.object({
+  ...SearchRequestMixin.shape,
+  ...ListRequestMixin.shape,
+  // additional filters can be added here in the future
+});

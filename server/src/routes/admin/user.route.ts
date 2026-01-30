@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { userController } from '@/modules/user';
 import { validateRequestBody } from '@/middlewares';
-import { CreateUserSchema } from '@/schemas';
+import { CreateUserSchema, SearchUserFilterSchema } from '@/schemas';
 
 const adminUserRouter = Router();
 
@@ -17,5 +17,10 @@ adminUserRouter.get('/:id', userController.getUserById);
 adminUserRouter.put('/:id', userController.updateUserById);
 adminUserRouter.delete('/:id', userController.deleteUserById);
 adminUserRouter.patch('/:id/restore', userController.restoreUser);
+adminUserRouter.post(
+  '/search',
+  validateRequestBody(SearchUserFilterSchema),
+  userController.searchUser,
+);
 
 export default adminUserRouter;
