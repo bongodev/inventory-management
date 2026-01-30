@@ -13,7 +13,7 @@ RUN npm ci
 # copy project files
 COPY . .
 
-EXPOSE 5000
+EXPOSE 5175
 
-# run the server
+# run the client
 CMD ["npm", "run", "dev"]
