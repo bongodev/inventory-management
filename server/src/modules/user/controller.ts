@@ -43,3 +43,8 @@ export const restoreUser = async (req: Request, res: Response) => {
     message: 'User restored successful',
   });
 };
+
+export const searchUser = async (req: Request, res: Response) => {
+  const users = await userService.searchUsers(req.body);
+  return res.status(200).json(users);
+};

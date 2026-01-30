@@ -1,10 +1,12 @@
 import z from 'zod';
 import bcrypt from 'bcrypt';
+import type { QueryFilter } from 'mongoose';
 
-import { CreateUserSchema } from '@/schemas';
-import { UserModel } from './model';
+import { CreateUserSchema, SearchUserFilterSchema } from '@/schemas';
 import { envConfig } from '@/config';
-import { UpdateUser, User } from '@/types';
+import { PageResult, UpdateUser, User } from '@/types';
+
+import { UserDocument, UserModel } from './model';
 
 export const getHashedPassword = async (password: string) =>
   bcrypt.hash(password, envConfig.BCRYPT_SALT_ROUNDS);
@@ -92,7 +94,40 @@ export const verifyPassword = async (user: User, password: string) => {
   return bcrypt.compare(password, user.passwordHash);
 };
 
-
 export const getUserById = async (id: string) => {
   return UserModel.findById(id).exec(); // here exec() returns a Promise
-}
+};
+
+export const searchUsers = async (
+  filters: z.infer<typeof SearchUserFilterSchema>,
+): Promise<PageResult<User>> => {
+  let query: QueryFilter<UserDocument> = {
+    deleted: { $ne: true },
+  };
+
+  const searchQuery = filters.searchQuery?.trim();
+  if (searchQuery) {
+    query = {
+      ...query,
+      $or: [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { email: { $regex: searchQuery, $options: 'i' } },
+      ],
+    };
+  }
+
+  const skip = (filters.offset - 1) * filters.limit;
+  const limit = filters.limit;
+
+  const [users, total] = await Promise.all([
+    UserModel.find(query).skip(skip).limit(limit),
+    UserModel.countDocuments(query),
+  ]);
+
+  return {
+    data: users,
+    total,
+    offset: filters.offset,
+    limit: filters.limit,
+  };
+};
