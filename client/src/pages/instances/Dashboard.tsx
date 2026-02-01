@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import axios, { type AxiosResponse } from 'axios';
+import  { type AxiosResponse } from 'axios';
 
 import {
   Table,
