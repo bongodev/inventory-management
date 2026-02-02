@@ -2,30 +2,44 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router';
 
 import { QueryProvider } from '@/providers';
+import { AppSidebar } from '@/components/app-sidebar';
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
 
 const Layout = () => {
   const navigate = useNavigate();
 
-  // check auth here from the cookies
   useEffect(() => {
     const checkAuthFromCookies = (): boolean => {
-      // read the user info from local storage
       const user = localStorage.getItem('inv-user');
       return !!user;
     };
 
-    const isAuthenticated = checkAuthFromCookies(); // implement this function
-    if (!isAuthenticated) {
+    if (!checkAuthFromCookies()) {
       navigate('/login');
     }
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="App">
-      <QueryProvider>
-        <Outlet />
-      </QueryProvider>
-    </div>
+    <QueryProvider>
+      <SidebarProvider
+        style={
+          {
+            '--sidebar-width': 'calc(var(--spacing) * 72)',
+          } as React.CSSProperties
+        }
+      >
+        <AppSidebar />
+
+        <SidebarInset>
+          <SidebarTrigger />
+          <Outlet />
+        </SidebarInset>
+      </SidebarProvider>
+    </QueryProvider>
   );
 };
 
