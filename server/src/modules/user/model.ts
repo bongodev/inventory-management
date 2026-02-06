@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import { User } from '@/types';
-import { softDeletePlugin } from '@/common/mongoose-plugins';
+import { SoftDeleteMethods, softDeletePlugin } from '@/common/mongoose-plugins';
 
 const userSchema = new mongoose.Schema(
   {
@@ -18,6 +18,6 @@ const userSchema = new mongoose.Schema(
 
 userSchema.plugin(softDeletePlugin);
 
-export type UserDocument = User & mongoose.Document;
+export type UserDocument = User & mongoose.Document & SoftDeleteMethods;
 
 export const UserModel = mongoose.model<UserDocument>('User', userSchema);
