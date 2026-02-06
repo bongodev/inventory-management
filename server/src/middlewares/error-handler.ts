@@ -28,6 +28,30 @@ export const errorHandler = (
     });
   }
 
+  if (err.name === 'BadRequestError') {
+    return res.status(400).json({
+      error: err.message,
+    });
+  }
+
+  if (err.name === 'NotFoundError') {
+    return res.status(404).json({
+      error: err.message,
+    });
+  }
+
+  if (err.name === 'UnauthorizedError') {
+    return res.status(401).json({
+      error: err.message,
+    });
+  }
+
+  if (err.name === 'ForbiddenError') {
+    return res.status(403).json({
+      error: err.message,
+    });
+  }
+
   // Handle mongodb cast errors
   if (err.name === 'CastError') {
     return res.status(400).json({
