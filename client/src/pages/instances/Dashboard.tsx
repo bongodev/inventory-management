@@ -1,5 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
-import  { type AxiosResponse } from 'axios';
+import { useState } from 'react';
 
 import {
   Table,
@@ -25,38 +24,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import http from '@/lib/http';
+import { useInstanceSearch } from '@/api/hooks/useInstances';
 
-interface Instance {
+type Instance = {
   _id: string;
   name: string;
   subDomain?: string;
   createdAt: string;
-}
+};
 
 export default function Dashboard() {
-  const [instances, setInstances] = useState<Instance[]>([]);
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    http
-      .get('/api/admin/instances')
-      .then((res: AxiosResponse<Instance[]>) => setInstances(res.data))
-      .catch(console.error);
-  }, []);
+  const { instanceSearchQuery } = useInstanceSearch({
+    searchQuery: search,
+    offset: page,
+    limit: rowsPerPage,
+  });
 
-  const totalPages = Math.ceil(instances.length / rowsPerPage);
-
-  const paginatedData = useMemo(() => {
-    const start = (page - 1) * rowsPerPage; // js indexing starts from 0
-    return instances.slice(start, start + rowsPerPage);
-  }, [instances, page, rowsPerPage]);
+  const instances: Instance[] = instanceSearchQuery.data?.data || [];
+  const total = instanceSearchQuery.data?.total || 0;
+  const totalPages = Math.ceil(total / rowsPerPage);
+  const paginatedData: Instance[] = instances;
 
   return (
     <div className="p-6 space-y-6 bg-gray-50 min-h-screen">
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">All Instances</h1>
+      </div>
+
+      {/* Search input */}
+      <div className="mb-4 flex items-center gap-2">
+        <input
+          type="text"
+          placeholder="Search instances..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
+          className="border border-gray-300 rounded px-3 py-2 w-64"
+        />
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -79,9 +89,8 @@ export default function Dashboard() {
           </TableHeader>
 
           <TableBody>
-            {paginatedData.map((inst, i) => (
+            {paginatedData.map((inst: Instance, i: number) => (
               <TableRow key={inst._id} className="hover:bg-gray-50 transition">
-                {/* row num calculation for each page */}
                 <TableCell className="text-sm text-gray-800">
                   {(page - 1) * rowsPerPage + i + 1}
                 </TableCell>
@@ -114,7 +123,6 @@ export default function Dashboard() {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="5">5</SelectItem>
               <SelectItem value="10">10</SelectItem>
               <SelectItem value="20">20</SelectItem>
             </SelectContent>
