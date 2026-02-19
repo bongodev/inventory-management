@@ -27,3 +27,8 @@ export const softDeletePlugin = (schema: mongoose.Schema) => {
     this.deletedBy = null;
   };
 };
+
+export type SoftDeleteMethods = {
+  softDelete(deletedBy: string | null): void;
+  restore(): void;
+};

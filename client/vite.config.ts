@@ -18,6 +18,8 @@ export default defineConfig(({ mode }) => {
     server: {
       // Access the variable from the 'env' object created above
       port: parseInt(env.VITE_PORT_NUMBER) || 5175,
+      host: true,
+      strictPort: true,
     },
   };
 });
