@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CreatedMixin, SoftDeleteMixin, UpdatedMixin } from './mixin';
+import { CreatedMixin, ListRequestMixin, SearchRequestMixin, SoftDeleteMixin, UpdatedMixin } from './mixin';
 
 export const InstanceSchema = z.object({
   ...CreatedMixin.shape,
@@ -25,3 +25,9 @@ export const UpdateInstanceSchema = z.object({
   name: z.string().optional(),
   subDomain: z.string().optional(),
 });
+
+export const SearchInstanceFilterSchema = z.object({
+  ...ListRequestMixin.shape,
+  ...SearchRequestMixin.shape
+
+})

@@ -20,3 +20,13 @@ export const SoftDeleteMixin = z.object({
   deletedAt: z.union([z.date(), z.string()]).nullable().optional(),
   deletedBy: z.string().nullable().optional(),
 });
+
+
+export const ListRequestMixin = z.object({
+  offset: z.number().int().positive().optional().default(1),
+  limit: z.number().int().positive().optional().default(10),
+});
+
+export const SearchRequestMixin = z.object({
+  searchQuery: z.string().optional(),
+});

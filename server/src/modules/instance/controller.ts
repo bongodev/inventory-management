@@ -13,6 +13,7 @@ export const getInstances = async (_req: Request, res: Response) => {
 };
 
 export const getInstancesById = async (req: Request, res: Response) => {
+  //@ts-expect-error  req.params.id shows red underline
   const instance = await instanceService.getInstancesById(req.params.id);
 
   if (!instance) return res.status(404).json({ message: 'No instance found' });
@@ -22,6 +23,7 @@ export const getInstancesById = async (req: Request, res: Response) => {
 
 export const updateInstanceById = async (req: Request, res: Response) => {
   const updatedInstance = await instanceService.updateInstanceById(
+    //@ts-expect-error  req.params.id shows red underline
     req.params.id,
     req.body,
   );
@@ -37,6 +39,7 @@ export const updateInstanceById = async (req: Request, res: Response) => {
 
 export const deleteInstanceById = async (req: Request, res: Response) => {
   const deletedInstance = await instanceService.deleteInstanceById(
+   //@ts-expect-error  req.params.id shows red underline
     req.params.id,
   );
 
@@ -47,6 +50,7 @@ export const deleteInstanceById = async (req: Request, res: Response) => {
 };
 
 export const restoreInstance = async (req: Request, res: Response) => {
+  //@ts-expect-error  req.params.id shows red underline
   const restoredInstance = await instanceService.restoreInstance(req.params.id);
 
   if (!restoredInstance)
@@ -57,3 +61,22 @@ export const restoreInstance = async (req: Request, res: Response) => {
     message: 'Instance updated successfully',
   });
 };
+
+
+export const searchInstance = async (req: Request, res: Response) => {
+  const users = await instanceService.searchInstance(req.body);
+  return res.status(200).json(users);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
