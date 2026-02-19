@@ -21,7 +21,6 @@ export const SoftDeleteMixin = z.object({
   deletedBy: z.string().nullable().optional(),
 });
 
-
 export const ListRequestMixin = z.object({
   offset: z.number().int().positive().optional().default(1),
   limit: z.number().int().positive().optional().default(10),
