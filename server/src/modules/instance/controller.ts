@@ -57,3 +57,8 @@ export const restoreInstance = async (req: Request, res: Response) => {
     message: 'Instance updated successfully',
   });
 };
+
+export const searchInstance = async (req: Request, res: Response) => {
+  const users = await instanceService.searchInstance(req.body);
+  return res.status(200).json(users);
+};

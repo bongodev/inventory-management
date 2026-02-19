@@ -1,5 +1,9 @@
-import { CreateInstance, UpdateInstance } from '@/types';
-import { InstanceModel } from '@/modules/instance';
+import z from 'zod';
+
+import { CreateInstance, Instance, PageResult, UpdateInstance } from '@/types';
+import { InstanceDocument, InstanceModel } from '@/modules/instance';
+import { SearchInstanceFilterSchema } from '@/schemas';
+import { QueryFilter } from 'mongoose';
 
 export const createInstance = async (instancePayload: CreateInstance) => {
   const newInstance = await InstanceModel.create(instancePayload);
@@ -59,4 +63,38 @@ export const restoreInstance = async (_id: string) => {
     },
     { new: true },
   );
+};
+
+export const searchInstance = async (
+  filters: z.infer<typeof SearchInstanceFilterSchema>,
+): Promise<PageResult<Instance>> => {
+  let query: QueryFilter<InstanceDocument> = {
+    deleted: false,
+  };
+
+  const searchQuery = filters.searchQuery?.trim();
+  if (searchQuery) {
+    query = {
+      ...query,
+      $or: [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { subDomain: { $regex: searchQuery, $options: 'i' } },
+      ],
+    };
+  }
+
+  const skip = (filters.offset - 1) * filters.limit;
+  const limit = filters.limit;
+
+  const [instances, total] = await Promise.all([
+    InstanceModel.find(query).skip(skip).limit(limit),
+    InstanceModel.countDocuments(query),
+  ]);
+
+  return {
+    data: instances,
+    total,
+    offset: filters.offset,
+    limit: filters.limit,
+  };
 };

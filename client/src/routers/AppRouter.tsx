@@ -2,7 +2,8 @@ import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
 import { Layout, Login } from '@/pages';
-import { InstancePage } from '@/pages/instances';
+import { RightSideDrawer } from '@/pages/instances';
+import Dashboard from '@/pages/instances/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -11,15 +12,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <InstancePage />,
+        element: <RightSideDrawer/>,
       },
       {
         path: 'dashboard',
-        element: <div>dashboard page</div>,
+        element: <Dashboard />,
       },
       {
         path: 'instances',
-        element: <InstancePage />,
+        element: <RightSideDrawer/>,
       },
       {
         path: 'products',
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       {
         path: 'reports',
         element: <div>reports page</div>,
+        
       },
       {
         path: 'users',
